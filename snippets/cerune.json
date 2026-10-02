@@ -1,0 +1,76 @@
+{
+  "Function": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:name}(${2}) -> ${3:void} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Cerune function"
+  },
+  "Type": {
+    "prefix": "type",
+    "body": [
+      "type ${1:Name} {",
+      "\t${2:field}: ${3:i64},",
+      "}"
+    ],
+    "description": "Cerune named product type"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "enum ${1:Name} {",
+      "\t${2:Variant},",
+      "}"
+    ],
+    "description": "Cerune enum"
+  },
+  "If": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Cerune if statement"
+  },
+  "While": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Cerune while loop"
+  },
+  "For": {
+    "prefix": "for",
+    "body": [
+      "for (mut ${1:i}: i64 = ${2:0}; ${1:i} < ${3:count}; ${1:i} = ${1:i} + 1) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Cerune C-style for loop"
+  },
+  "For in": {
+    "prefix": "forin",
+    "body": [
+      "for (${1:item}: ${2:infer} in ${3:values}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Cerune array iteration"
+  },
+  "Match": {
+    "prefix": "match",
+    "body": [
+      "match ${1:value} {",
+      "\t${2:Type}::${3:Variant} { ${4} } => {",
+      "\t\t$0",
+      "\t},",
+      "}"
+    ],
+    "description": "Cerune match statement"
+  }
+}

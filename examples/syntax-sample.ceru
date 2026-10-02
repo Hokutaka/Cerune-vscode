@@ -1,0 +1,45 @@
+// Cerune syntax-highlighting smoke test.
+import "math.ceru" as math;
+
+pub const COUNT: u32 = 3;
+
+type Point {
+    x: f64 = 0.0,
+    y: f64,
+}
+
+enum Lookup {
+    Found { text: string },
+    Missing,
+}
+
+fn clamp<T>(value: T) -> T {
+    return value;
+}
+
+fn main() -> void {
+    mut values: [i64; COUNT] = [1, 2, 3];
+    ratio: f32 = 1.5e-3f32;
+    message: string = concat("Cerune ", "\u{8a00}\u{8a9e}");
+
+    print(byte_len(message));
+    print(array_len(values));
+
+    for (mut i: i64 = 0; i < array_len(values); i = i + 1) {
+        values[i] = values[i] << 1;
+    }
+
+    result: Lookup = Lookup::Found { text: message };
+
+    match result {
+        Lookup::Found { text: text } if byte_len(text) > 0 => {
+            print(text);
+        },
+        Lookup::Missing {} => {
+            print("missing");
+        },
+    }
+
+    rounded: u8 = saturating_round<u8>(300.5);
+    print(rounded);
+}

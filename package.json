@@ -1,0 +1,48 @@
+{
+  "name": "cerune-language-support",
+  "displayName": "Cerune Language Support",
+  "description": "Syntax highlighting and basic editor support for the Cerune programming language.",
+  "version": "0.0.1",
+  "publisher": "Hokutaka",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "cerune",
+    "ceru",
+    "language",
+    "syntax"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "cerune",
+        "aliases": [
+          "Cerune",
+          "cerune"
+        ],
+        "extensions": [
+          ".ceru"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cerune",
+        "scopeName": "source.cerune",
+        "path": "./syntaxes/cerune.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "cerune",
+        "path": "./snippets/cerune.json"
+      }
+    ]
+  }
+}

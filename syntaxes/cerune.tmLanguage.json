@@ -1,0 +1,331 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Cerune",
+  "scopeName": "source.cerune",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#declarations"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#type-references"
+    },
+    {
+      "include": "#builtins"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#function-calls"
+    },
+    {
+      "include": "#enum-variants"
+    },
+    {
+      "include": "#properties"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.cerune",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "type-references": {
+      "patterns": [
+        {
+          "match": "(:|->|\\[)\\s*((?!(?:i8|u8|i16|u16|i32|u32|i64|u64|f32|f64|bool|string|infer|void)\\b)[A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator.type.cerune"
+            },
+            "2": {
+              "name": "entity.name.type.cerune"
+            }
+          }
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.cerune",
+          "begin": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.cerune"
+            }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.cerune"
+            }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.escape.cerune",
+              "match": "\\\\(?:[\"\\\\nrt0]|u\\{[0-9A-Fa-f]{1,6}\\})"
+            },
+            {
+              "name": "invalid.illegal.escape.cerune",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "begin": "\\b(fn)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(<)",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.function.cerune"
+            },
+            "2": {
+              "name": "entity.name.function.cerune"
+            },
+            "3": {
+              "name": "punctuation.definition.typeparameters.begin.cerune"
+            }
+          },
+          "end": ">",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.typeparameters.end.cerune"
+            }
+          },
+          "patterns": [
+            {
+              "name": "storage.modifier.cerune",
+              "match": "\\bconst\\b"
+            },
+            {
+              "include": "#types"
+            },
+            {
+              "name": "entity.name.type.parameter.cerune",
+              "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b"
+            },
+            {
+              "name": "punctuation.separator.comma.cerune",
+              "match": ","
+            },
+            {
+              "name": "punctuation.separator.type.cerune",
+              "match": ":"
+            }
+          ]
+        },
+        {
+          "match": "\\b(fn)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.function.cerune"
+            },
+            "2": {
+              "name": "entity.name.function.cerune"
+            }
+          }
+        },
+        {
+          "match": "\\b(type)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.cerune"
+            },
+            "2": {
+              "name": "entity.name.type.cerune"
+            }
+          }
+        },
+        {
+          "match": "\\b(enum)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.enum.cerune"
+            },
+            "2": {
+              "name": "entity.name.type.enum.cerune"
+            }
+          }
+        },
+        {
+          "match": "\\b(const)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.modifier.cerune"
+            },
+            "2": {
+              "name": "constant.other.cerune"
+            }
+          }
+        },
+        {
+          "match": "\\b(import)\\s+(?=\")",
+          "captures": {
+            "1": {
+              "name": "keyword.control.import.cerune"
+            }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.cerune",
+          "match": "\\b(?:if|else|while|for|in|match|return|break|continue)\\b"
+        },
+        {
+          "name": "keyword.control.import.cerune",
+          "match": "\\b(?:import|as)\\b"
+        },
+        {
+          "name": "storage.modifier.cerune",
+          "match": "\\b(?:pub|mut|const)\\b"
+        },
+        {
+          "name": "storage.type.cerune",
+          "match": "\\b(?:fn|type|enum|void|infer)\\b"
+        },
+        {
+          "name": "support.function.builtin.cerune",
+          "match": "\\bprint\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.cerune",
+          "match": "\\b(?:true|false)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "support.type.primitive.cerune",
+          "match": "\\b(?:i8|u8|i16|u16|i32|u32|i64|u64|f32|f64|bool|string)\\b"
+        }
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.cerune",
+          "match": "\\b(?:convert|trunc|floor|ceil|round|round_ties_even|saturating_trunc|saturating_floor|saturating_ceil|saturating_round|saturating_round_ties_even|concat|byte_len|array_len|array_copy|array_copy_range)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.cerune",
+          "match": "(?<![A-Za-z0-9_])(?:\\d+\\.\\d+(?:[eE][+-]?\\d+)?(?:f32|f64)?|\\d+[eE][+-]?\\d+(?:f32|f64)?|\\d+(?:f32|f64))(?![A-Za-z0-9_])"
+        },
+        {
+          "name": "constant.numeric.integer.cerune",
+          "match": "(?<![A-Za-z0-9_])\\d+(?:i16|u16|i32|u32|i64|u64|i8|u8)?(?![A-Za-z0-9_])"
+        }
+      ]
+    },
+    "function-calls": {
+      "patterns": [
+        {
+          "name": "entity.name.function.call.cerune",
+          "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*(?:::\\s*<[^>\\n]+>)?\\s*\\()"
+        }
+      ]
+    },
+    "enum-variants": {
+      "patterns": [
+        {
+          "match": "(::)\\s*([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.cerune"
+            },
+            "2": {
+              "name": "constant.other.enum.cerune"
+            }
+          }
+        }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {
+          "match": "(\\.)\\s*([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.accessor.cerune"
+            },
+            "2": {
+              "name": "variable.other.property.cerune"
+            }
+          }
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.cerune",
+          "match": "=>|->|::|\\.\\.|==|!=|&&|\\|\\||<=|>=|<<|>>|[=!:,.+\\-*/%&|^~<>]"
+        },
+        {
+          "name": "punctuation.terminator.statement.cerune",
+          "match": ";"
+        },
+        {
+          "name": "punctuation.section.block.begin.cerune",
+          "match": "\\{"
+        },
+        {
+          "name": "punctuation.section.block.end.cerune",
+          "match": "\\}"
+        },
+        {
+          "name": "punctuation.section.group.begin.cerune",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.section.group.end.cerune",
+          "match": "\\)"
+        },
+        {
+          "name": "punctuation.section.brackets.begin.cerune",
+          "match": "\\["
+        },
+        {
+          "name": "punctuation.section.brackets.end.cerune",
+          "match": "\\]"
+        }
+      ]
+    }
+  }
+}
