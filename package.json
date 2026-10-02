@@ -5,6 +5,10 @@
   "version": "0.0.1",
   "publisher": "Hokutaka",
   "license": "MIT",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/Hokutaka/Cerune-vscode.git"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -46,3 +50,4 @@
     ]
   }
 }
+
